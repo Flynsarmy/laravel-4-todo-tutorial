@@ -34,9 +34,12 @@ class TasksController extends \BaseController {
 	{
 		$input = Input::all();
 		$input['project_id'] = $project->id;
-		Task::create( $input );
+		$task = new Task($input);
 
-		return Redirect::route('projects.show', $project->slug)->with('Task created.');
+		if ( $task->save() )
+			return Redirect::route('projects.show', $project->slug)->with('message', 'Task created.');
+		else
+			return Redirect::route('projects.tasks.create', $project->slug)->withInput()->withErrors( $task->errors() );
 	}
 
 	/**
@@ -72,10 +75,13 @@ class TasksController extends \BaseController {
 	 */
 	public function update(Project $project, Task $task)
 	{
-		$input = array_except(Input::all(), '_method');
-		$task->update($input);
+		$input = Input::all();
+		$task->fill($input);
 
-		return Redirect::route('projects.tasks.show', [$project->slug, $task->slug])->with('message', 'Task updated.');
+		if ( $task->updateUniques() )
+			return Redirect::route('projects.tasks.show', [$project->slug, $task->slug])->with('message', 'Task updated.');
+		else
+			return Redirect::route('projects.tasks.edit', [$project->slug, array_get($task->getOriginal(), 'slug')])->withInput()->withErrors( $task->errors() );
 	}
 
 	/**

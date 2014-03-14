@@ -31,9 +31,12 @@ class ProjectsController extends \BaseController {
 	public function store()
 	{
 		$input = Input::all();
-		Project::create( $input );
+		$project = new Project($input);
 
-		return Redirect::route('projects.index')->with('message', 'Project created');
+		if ( $project->save() )
+			return Redirect::route('projects.index')->with('message', 'Project created.');
+		else
+			return Redirect::route('projects.create')->withInput()->withErrors( $project->errors() );
 	}
 
 	/**
@@ -67,9 +70,12 @@ class ProjectsController extends \BaseController {
 	public function update(Project $project)
 	{
 		$input = array_except(Input::all(), '_method');
-		$project->update($input);
+		$project->fill($input);
 
-		return Redirect::route('projects.show', $project->slug)->with('message', 'Project updated.');
+		if ( $project->updateUniques() )
+			return Redirect::route('projects.show', $project->slug)->with('message', 'Project updated.');
+		else
+			return Redirect::route('projects.edit', array_get($project->getOriginal(), 'slug'))->withInput()->withErrors( $project->errors() );
 	}
 
 	/**
