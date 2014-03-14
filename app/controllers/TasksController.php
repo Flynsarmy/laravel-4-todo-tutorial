@@ -10,7 +10,7 @@ class TasksController extends \BaseController {
 	 */
 	public function index(Project $project)
 	{
-		$this->layout->content = View::make('tasks.index');
+		$this->layout->content = View::make('tasks.index', compact('project'));
 	}
 
 	/**
@@ -21,7 +21,7 @@ class TasksController extends \BaseController {
 	 */
 	public function create(Project $project)
 	{
-		$this->layout->content = View::make('tasks.create');
+		$this->layout->content = View::make('tasks.create', compact('project'));
 	}
 
 	/**
