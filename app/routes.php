@@ -23,4 +23,4 @@ Route::get('/', function()
 	return View::make('hello');
 });
 Route::resource('projects', 'ProjectsController');
-Route::resource('tasks', 'TasksController');
+Route::resource('projects.tasks', 'TasksController');
