@@ -5,29 +5,32 @@ class TasksController extends \BaseController {
 	/**
 	 * Display a listing of the resource.
 	 *
+	 * @param  Project  $project
 	 * @return Response
 	 */
-	public function index()
+	public function index(Project $project)
 	{
-		//
+		$this->layout->content = View::make('tasks.index');
 	}
 
 	/**
 	 * Show the form for creating a new resource.
 	 *
+	 * @param  Project  $project
 	 * @return Response
 	 */
-	public function create()
+	public function create(Project $project)
 	{
-		//
+		$this->layout->content = View::make('tasks.create');
 	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param  Project  $project
 	 * @return Response
 	 */
-	public function store()
+	public function store(Project $project)
 	{
 		//
 	}
@@ -35,32 +38,35 @@ class TasksController extends \BaseController {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  Project  $project
+	 * @param  Task     $task
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(Project $project, Task $task)
 	{
-		//
+		$this->layout->content = View::make('tasks.show', compact('project', 'task'));
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  Project  $project
+	 * @param  Task     $task
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Project $project, Task $task)
 	{
-		//
+		$this->layout->content = View::make('tasks.edit', compact('project', 'task'));
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  Project  $project
+	 * @param  Task     $task
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Project $project, Task $task)
 	{
 		//
 	}
@@ -68,10 +74,11 @@ class TasksController extends \BaseController {
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  Project  $project
+	 * @param  Task     $task
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(Project $project, Task $task)
 	{
 		//
 	}

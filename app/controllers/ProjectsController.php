@@ -9,7 +9,8 @@ class ProjectsController extends \BaseController {
 	 */
 	public function index()
 	{
-		//
+		$projects = Project::all();
+		$this->layout->content = View::make('projects.index', compact('projects'));
 	}
 
 	/**
@@ -19,7 +20,7 @@ class ProjectsController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
+		$this->layout->content = View::make('projects.create');
 	}
 
 	/**
@@ -35,32 +36,32 @@ class ProjectsController extends \BaseController {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  Project  $project
 	 * @return Response
 	 */
-	public function show($id)
+	public function show(Project $project)
 	{
-		//
+		$this->layout->content = View::make('projects.show', compact('project'));
 	}
 
 	/**
 	 * Show the form for editing the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  Project  $project
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit(Project $project)
 	{
-		//
+		$this->layout->content = View::make('projects.edit', compact('project'));
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  Project  $project
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(Project $project)
 	{
 		//
 	}
@@ -68,10 +69,10 @@ class ProjectsController extends \BaseController {
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  Project  $project
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy(Project $project)
 	{
 		//
 	}
